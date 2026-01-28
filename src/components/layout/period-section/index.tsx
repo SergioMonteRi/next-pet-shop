@@ -22,10 +22,28 @@ export const PeriodSection = ({ period }: PeriodSectionProps) => {
           <div>{PeriodIcons[type]}</div>
           <h2 className="text-label-large text-content-primary">{title}</h2>
         </div>
+
         <span className="text-label-large text-content-secondary">
           {timeRange}
         </span>
       </div>
+
+      {period.appointments.length > 0 ? (
+        <div className="px-5">
+          <div>
+            <div className="text-label-small text-content-secondary mb-2 grid grid-cols-2 md:hidden">
+              <div className="text-left">Horário</div>
+              <div className="text-right">Paciente</div>
+            </div>
+
+            {period.appointments.map((appointment) => (
+              <div key={appointment.id}>{appointment.petName}</div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <p>Nenhum agendamento para este período</p>
+      )}
     </section>
   )
 }
