@@ -2,6 +2,7 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 import nextVitals from 'eslint-config-next/core-web-vitals'
 import nextTs from 'eslint-config-next/typescript'
 import prettierConfig from 'eslint-config-prettier'
+import prettier from 'eslint-plugin-prettier'
 import eslintPluginSimpleImportSort from 'eslint-plugin-simple-import-sort'
 import unusedImports from 'eslint-plugin-unused-imports'
 
@@ -11,6 +12,7 @@ const eslintConfig = defineConfig([
   prettierConfig,
   {
     plugins: {
+      prettier,
       'simple-import-sort': eslintPluginSimpleImportSort,
       'unused-imports': unusedImports,
     },
@@ -18,6 +20,9 @@ const eslintConfig = defineConfig([
     files: ['**/*.{js,jsx,ts,tsx}'],
 
     rules: {
+      // Prettier integration
+      'prettier/prettier': 'error',
+
       // React / arrow preferences
       'arrow-body-style': 'off',
       'prefer-arrow-callback': 'off',
