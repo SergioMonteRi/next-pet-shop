@@ -1,12 +1,22 @@
+import { cn } from '@/lib/utils'
 import { Appointment } from '@/types'
 
 type AppointmentCardProps = {
   appointment: Appointment
+  isFirstInSection?: boolean
 }
 
-export const AppointmentCard = ({ appointment }: AppointmentCardProps) => {
+export const AppointmentCard = ({
+  appointment,
+  isFirstInSection,
+}: AppointmentCardProps) => {
   return (
-    <div>
+    <div
+      className={cn(
+        'grid grid-cols-2 items-center py-3 md:grid-cols-[15%_35%_30%_20%]',
+        !isFirstInSection && 'border-t border-gray-500/30',
+      )}
+    >
       <div className="pr-4 text-left md:pr-0">
         <span className="text-label-small text-content-primary font-semibold">
           {appointment.time}
@@ -23,12 +33,12 @@ export const AppointmentCard = ({ appointment }: AppointmentCardProps) => {
             {appointment.tutorName}
           </span>
         </div>
+      </div>
 
-        <div className="col-span-2 flex items-center justify-end gap-2 pr-4 text-left md:col-span-1 md:mt-0">
-          <span className="text-paragraph-small text-content-secondary">
-            {appointment.description}
-          </span>
-        </div>
+      <div className="col-span-2 mt-1 hidden pr-4 text-left md:col-span-1 md:mt-0 md:block">
+        <span className="text-paragraph-small-size text-content-secondary">
+          {appointment.description}
+        </span>
       </div>
     </div>
   )
